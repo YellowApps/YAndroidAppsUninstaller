@@ -46,7 +46,7 @@ $btn.Height = 80
 $btn.Width = 470 
 $btn.Add_Click({
     if($cb.SelectedItem -eq "---Пусто---" -or ([System.Windows.Forms.MessageBox]::Show("Вы точно хотите удалить пакет `"" + $cb.SelectedItem + "`"?", "Y Android Apps Uninstaller", 4, 32)) -eq "No") { return }
-    adb\adb shell pm uninstall $cb.SelectedItem
+    adb\adb shell pm uninstall -k --user 0 $cb.SelectedItem
     [System.Windows.Forms.MessageBox]::Show("Пакет `"" + $cb.SelectedItem + "`" удалён.", "Y Android Apps Uninstaller", 0, 64) | Out-Null
 
     $Global:pkglist = (adb\adb shell pm list packages) -replace "package:", ""
